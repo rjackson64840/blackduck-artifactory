@@ -216,6 +216,7 @@ private void initialize() {
     blackDuckArtifactoryConfig.setThirdPartyVersion(ctx?.versionProvider?.running?.versionName?.toString())
     blackDuckArtifactoryConfig.setPluginName(this.getClass().getSimpleName())
     blackDuckArtifactoryConfig.loadProperties(propertiesFilePathOverride)
+    blackDuckArtifactoryConfig.setupHubServerConfig();
 
     // The ScanArtifactoryConfig must be created before other services
     scanArtifactoryConfig = new ScanArtifactoryConfig(blackDuckArtifactoryConfig)

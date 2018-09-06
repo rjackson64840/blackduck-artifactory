@@ -23,15 +23,15 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 dependencies {
-    compile 'com.blackducksoftware.integration:hub-artifactory-common:0.2.3-SNAPSHOT'
+    compile 'com.blackducksoftware.integration:hub-artifactory-common:0.3.0-SNAPSHOT'
     compile 'org.springframework.boot:spring-boot-starter'
     compile 'org.springframework:spring-web'
     compile 'org.quartz-scheduler:quartz:2.2.1'
     compile 'org.apache.commons:commons-configuration2:2.2'
     compile 'commons-beanutils:commons-beanutils:1.9.3'
-    
+
     compileOnly 'org.artifactory:artifactory-papi:' + artifactoryMinimumVersion
-    
+
     testCompile 'org.artifactory:artifactory-papi:' + artifactoryMinimumVersion
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
@@ -47,16 +47,18 @@ task createFinalZip(type: Zip) {
     from("${projectDir}/src/main/resources/") {
         include 'version.txt'
         include 'blackDuckCacheInspector.properties'
+        include 'blackDuckPolicyEnforcer.properties'
         into 'plugins/lib'
     }
-    
-    from ("${projectDir}/build/configs/") {
+
+    // Generated during build
+    from("${projectDir}/build/configs/") {
         include 'blackDuckScanForHub.properties'
         into 'plugins/lib'
     }
 
-    from("${buildDir}/libs") { 
-        include '*.jar' 
+    from("${buildDir}/libs") {
+        include '*.jar'
         exclude '*sources.jar'
         exclude '*javadoc.jar'
     }
@@ -70,8 +72,8 @@ task createFinalZip(type: Zip) {
         include 'blackDuckCacheInspector.groovy'
         into 'plugins'
     }
-    
-    from("${projectDir}/src/main/groovy/com/blackducksoftware/integration/hub/artifactory") {
+
+    from("${projectDir}/src/main/groovy/com/blackducksoftware/integration/hub/artifactory/policy") {
         include 'blackDuckPolicyEnforcer.groovy'
         into 'plugins'
     }

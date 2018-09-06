@@ -255,6 +255,7 @@ private void initialize() {
     blackDuckArtifactoryConfig.setPluginName(this.getClass().getSimpleName())
 
     blackDuckArtifactoryConfig.loadProperties(propertiesFilePathOverride)
+    blackDuckArtifactoryConfig.setupHubServerConfig()
     blackDuckIdentifyArtifactsCron = blackDuckArtifactoryConfig.getProperty(InspectPluginProperty.IDENTIFY_ARTIFACTS_CRON)
     blackDuckPopulateMetadataCron = blackDuckArtifactoryConfig.getProperty(InspectPluginProperty.POPULATE_METADATA_CRON)
     blackDuckUpdateMetadataCron = blackDuckArtifactoryConfig.getProperty(InspectPluginProperty.UPDATE_METADATA_CRON)

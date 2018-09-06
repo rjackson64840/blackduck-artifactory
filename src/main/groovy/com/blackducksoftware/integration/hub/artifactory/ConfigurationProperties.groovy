@@ -30,8 +30,9 @@ import org.springframework.stereotype.Component
 
 @Component
 @PropertySources([
-    @PropertySource('blackDuckCacheInspector.properties'),
-    @PropertySource('blackDuckScanForHub.properties')
+@PropertySource('blackDuckCacheInspector.properties'),
+@PropertySource('blackDuckScanForHub.properties'),
+@PropertySource('blackDuckPolicyEnforcer.properties')
 ])
 class ConfigurationProperties {
     @Value('${user.dir}')
@@ -148,4 +149,7 @@ class ConfigurationProperties {
     @Value('${hub.artifactory.scan.repo.path.codelocation}')
     String hubArtifactoryScanRepoPathCodelocation
 
+    // Policy enforcer
+    @Value('${blackduck.artifactory.metadata.block}')
+    String blackduckMetadataBlock
 }
